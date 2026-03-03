@@ -34,38 +34,38 @@ export default function Home() {
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-white/5" />
         <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-white/5" />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 md:py-28 lg:grid-cols-2 lg:px-8">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:py-28 lg:grid-cols-2 lg:px-8">
           {/* Left text */}
-          <div className="text-white">
+          <div className="text-white text-center lg:text-left">
             <p className="mb-3 inline-block rounded-full bg-white/15 px-4 py-1 text-xs font-medium tracking-wide backdrop-blur-sm">
               Chartered Accountant &amp; Tax Consultant
             </p>
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {SITE_CONFIG.name}
             </h1>
-            <p className="mt-4 max-w-lg text-lg text-white/80 leading-relaxed">
+            <p className="mt-4 mx-auto lg:mx-0 max-w-lg text-base sm:text-lg text-white/80 leading-relaxed">
               {SITE_CONFIG.tagline}. Helping businesses stay compliant, grow
               sustainably, and operate with financial clarity.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
               <Link
                 href="/contact"
                 id="hero-cta"
-                className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary shadow-lg hover:shadow-xl transition-all"
               >
                 Get Free Consultation <ArrowRight size={16} />
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
               >
                 Our Services
               </Link>
             </div>
 
             {/* Trust chips */}
-            <div className="mt-10 flex flex-wrap gap-6">
+            <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
               {highlights.map((h) => (
                 <div key={h.label} className="flex items-center gap-2 text-white/70 text-sm">
                   {h.icon}
@@ -145,7 +145,7 @@ export default function Home() {
       {/* ── ABOUT PREVIEW ── */}
       <section className="bg-background" id="about-preview">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid items-center gap-10 lg:grid-cols-2 text-center lg:text-left">
             <div>
               <p className="text-sm font-semibold text-accent uppercase tracking-wider">
                 Who We Are
@@ -153,7 +153,7 @@ export default function Home() {
               <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
                 About {SITE_CONFIG.name}
               </h2>
-              <p className="mt-4 text-muted leading-relaxed">
+              <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-muted leading-relaxed">
                 With deep expertise in taxation, auditing, and business
                 compliance, we deliver precise financial solutions that
                 empower businesses to thrive. Our commitment to accuracy,
@@ -161,14 +161,14 @@ export default function Home() {
               </p>
               <Link
                 href="/about"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-light transition-colors"
+                className="mt-6 inline-flex items-center justify-center gap-2 text-sm font-semibold text-primary hover:text-primary-light transition-colors"
               >
                 Learn More <ArrowRight size={16} />
               </Link>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
               {[
                 { value: "10+", label: "Years Experience" },
                 { value: "500+", label: "Clients Served" },
