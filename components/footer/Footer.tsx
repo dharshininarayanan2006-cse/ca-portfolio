@@ -1,43 +1,54 @@
-import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="bg-foreground text-white" id="footer">
-            <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
-                <div className="grid gap-10 md:grid-cols-3">
+        <footer className="bg-primary text-white" id="footer">
+            {/* Gradient top separator */}
+            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+            <div className="mx-auto max-w-[1280px] px-6 py-14 lg:px-8 lg:py-16">
+                <div className="grid gap-12 md:grid-cols-3">
                     {/* Brand */}
                     <div>
-                        <div className="flex items-center gap-2 mb-4">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-lg">
+                        <div className="flex items-center gap-3 mb-5">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white font-bold text-sm border border-white/10">
                                 VK
                             </span>
                             <div>
-                                <p className="font-bold leading-tight">{SITE_CONFIG.name}</p>
-                                <p className="text-sm text-white/60">{SITE_CONFIG.role}</p>
+                                <p className="font-semibold leading-tight tracking-tight">
+                                    {SITE_CONFIG.name}
+                                </p>
+                                <p className="text-[11px] text-white/50 font-medium">
+                                    {SITE_CONFIG.role}
+                                </p>
                             </div>
                         </div>
-                        <p className="text-sm text-white/70 leading-relaxed max-w-sm">
+                        <p className="text-sm text-white/50 leading-relaxed max-w-sm font-normal">
                             {SITE_CONFIG.description}
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white/30 mb-5">
                             Quick Links
                         </h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                             {NAV_LINKS.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-white/70 hover:text-accent transition-colors"
+                                        className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-peach font-medium transition-colors"
                                     >
                                         {link.label}
+                                        <ArrowUpRight
+                                            size={12}
+                                            className="opacity-0 -translate-y-0.5 transition-all group-hover:opacity-100"
+                                        />
                                     </Link>
                                 </li>
                             ))}
@@ -46,30 +57,38 @@ export default function Footer() {
 
                     {/* Contact Info */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white/30 mb-5">
                             Get in Touch
                         </h3>
-                        <ul className="space-y-3">
-                            <li className="flex items-start gap-3 text-sm text-white/70">
-                                <MapPin size={16} className="mt-0.5 shrink-0 text-accent" />
-                                <span>{SITE_CONFIG.address}</span>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3 text-sm text-white/60">
+                                <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 shrink-0 mt-0.5">
+                                    <MapPin size={14} className="text-peach" />
+                                </div>
+                                <span className="leading-relaxed font-normal">
+                                    {SITE_CONFIG.address}
+                                </span>
                             </li>
                             <li>
                                 <a
                                     href={`tel:${SITE_CONFIG.phone}`}
-                                    className="flex items-center gap-3 text-sm text-white/70 hover:text-accent transition-colors"
+                                    className="flex items-center gap-3 text-sm text-white/60 hover:text-peach transition-colors"
                                 >
-                                    <Phone size={16} className="shrink-0" />
-                                    {SITE_CONFIG.phone}
+                                    <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 shrink-0">
+                                        <Phone size={14} className="text-peach" />
+                                    </div>
+                                    <span className="font-medium">{SITE_CONFIG.phone}</span>
                                 </a>
                             </li>
                             <li>
                                 <a
                                     href={`mailto:${SITE_CONFIG.email}`}
-                                    className="flex items-center gap-3 text-sm text-white/70 hover:text-accent transition-colors"
+                                    className="flex items-center gap-3 text-sm text-white/60 hover:text-peach transition-colors"
                                 >
-                                    <Mail size={16} className="shrink-0" />
-                                    {SITE_CONFIG.email}
+                                    <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 shrink-0">
+                                        <Mail size={14} className="text-peach" />
+                                    </div>
+                                    <span className="font-medium">{SITE_CONFIG.email}</span>
                                 </a>
                             </li>
                         </ul>
@@ -77,9 +96,12 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="mt-10 border-t border-white/10 pt-6 text-center">
-                    <p className="text-xs text-white/40">
+                <div className="mt-14 border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-xs text-white/30 font-medium">
                         © {year} {SITE_CONFIG.name}. All rights reserved.
+                    </p>
+                    <p className="text-xs text-white/20 font-medium">
+                        Designed with care
                     </p>
                 </div>
             </div>

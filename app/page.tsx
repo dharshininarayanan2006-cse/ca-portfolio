@@ -1,223 +1,352 @@
-import Link from "next/link";
+"use client";
+
+import { SERVICES } from "@/lib/constants";
 import {
   ArrowRight,
+  Briefcase,
+  Building2,
+  Calculator,
+  CheckCircle,
+  FileText,
+  GitBranch,
+  Receipt,
+  Send,
   Shield,
   TrendingUp,
   Users,
-  CheckCircle,
-  Receipt,
-  FileText,
-  Building2,
-  Calculator,
 } from "lucide-react";
-import { SITE_CONFIG, SERVICES } from "@/lib/constants";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const iconMap: Record<string, React.ReactNode> = {
-  receipt: <Receipt size={28} />,
-  "file-text": <FileText size={28} />,
-  "building-2": <Building2 size={28} />,
-  calculator: <Calculator size={28} />,
+  receipt: <Receipt size={22} />,
+  "file-text": <FileText size={22} />,
+  "building-2": <Building2 size={22} />,
+  calculator: <Calculator size={22} />,
 };
 
-const highlights = [
-  { icon: <Shield size={24} />, label: "Trusted Expertise" },
-  { icon: <TrendingUp size={24} />, label: "Business Growth" },
-  { icon: <Users size={24} />, label: "Client-First Approach" },
+const serviceCards = [
+  {
+    title: "Direct Tax",
+    subtitle: "Tax Filing & Compliance",
+    icon: <Receipt size={26} />,
+    headerBg: "bg-primary",
+    textWhite: true,
+    features: ["Income Tax Filings", "TDS Return Filing", "Tax Audit", "Professional Certifications"],
+    highlighted: false,
+  },
+  {
+    title: "Business Registrations",
+    subtitle: "Incorporation & Filings",
+    icon: <Building2 size={26} />,
+    headerBg: "bg-peach",
+    textWhite: false,
+    features: ["Company Incorporation", "Company Annual Filings", "MSME Registration", "IEC Registration", "Professional Tax Registration"],
+    highlighted: true,
+  },
+  {
+    title: "Accounting",
+    subtitle: "Books & Payroll",
+    icon: <Calculator size={26} />,
+    headerBg: "bg-soft-blue",
+    textWhite: false,
+    features: ["Bookkeeping (Tally)", "Financial Statements", "Payroll Management", "GST Registration & Filings"],
+    highlighted: false,
+  },
 ];
 
 export default function Home() {
+  const revealRefs = useRef<HTMLElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const addRef = (el: HTMLElement | null) => {
+    if (el && !revealRefs.current.includes(el)) revealRefs.current.push(el);
+  };
+
   return (
     <>
-      {/* ──────── HERO ──────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-[#152C69] to-[#0A1635]">
-        {/* Soft Glowing Orbs for Premium Background Depth */}
-        <div className="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-white/5 blur-[100px] pointer-events-none" />
+      {/* ═══════════════════════════════════════
+          HERO — Full viewport, 2-col grid
+          ═══════════════════════════════════════ */}
+      <section className="relative min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] flex items-center bg-white">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* ─── Left: Content ─── */}
+            <div className="flex flex-col gap-7 lg:gap-8 max-w-xl">
+              <p className="text-sm font-medium text-primary uppercase tracking-wide">
+                Trusted Chartered Accountant in Chennai
+              </p>
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 md:py-40 lg:grid-cols-2 lg:px-8">
-          {/* Left text */}
-          <div className="text-white text-center lg:text-left z-10">
-            <div className="mb-6 inline-flex items-center rounded-full bg-white/10 px-5 py-2 text-xs font-semibold tracking-widest text-[#E2E8F0] backdrop-blur-md border border-white/20">
-              <span className="mr-2 h-2 w-2 rounded-full bg-accent animate-pulse"></span>
-              CHARTERED ACCOUNTANT &amp; TAX CONSULTANT
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.1] max-w-[24ch] lg:max-w-[26ch]">
+                All financial clarity in one firm
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[48ch]">
+                Expert chartered accountancy that manages your finances, automates compliance workflows, and helps your business grow with complete transparency.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-all duration-200 shadow-sm"
+                >
+                  Get Free Consultation
+                  <ArrowRight size={16} className="ml-2" />
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold border border-slate-300 text-slate-700 hover:bg-slate-100 transition-all duration-200"
+                >
+                  Explore Services
+                </Link>
+              </div>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200/80">
+                {[
+                  { icon: <Shield size={16} />, label: "100% Compliance" },
+                  { icon: <TrendingUp size={16} />, label: "10+ Years" },
+                  { icon: <Users size={16} />, label: "500+ Clients" },
+                ].map((badge) => (
+                  <div key={badge.label} className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                    <span className="text-primary">{badge.icon}</span>
+                    {badge.label}
+                  </div>
+                ))}
+              </div>
             </div>
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-7xl drop-shadow-lg">
-              {SITE_CONFIG.name}
-            </h1>
-            <p className="mt-6 mx-auto lg:mx-0 max-w-lg text-lg sm:text-xl text-slate-300 font-light leading-relaxed">
-              {SITE_CONFIG.tagline}. Structuring absolute compliance and ensuring business growth with ultimate financial clarity.
-            </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-5 justify-center lg:justify-start">
-              <Link
-                href="/contact"
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-full bg-accent hover:bg-[#D97706] px-8 py-4 text-sm font-bold text-white shadow-[0_10px_40px_-10px_rgba(245,158,11,0.5)] hover:shadow-[0_15px_50px_-10px_rgba(245,158,11,0.6)] transition-all duration-300 transform hover:-translate-y-1"
-              >
-                Get Free Consultation <ArrowRight size={18} />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-full border border-white/30 px-8 py-4 text-sm font-bold text-white backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
-              >
-                Our Services
-              </Link>
+            {/* ─── Right: Visual — Single clean image ─── */}
+            <div className="hidden lg:block">
+              <div className="relative w-full aspect-[4/3] rounded-2xl bg-slate-100 overflow-hidden shadow-xl shadow-slate-200/60">
+                <Image
+                  src="/images/professional.png"
+                  alt="Professional at work"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
 
-            {/* Trust chips */}
-            <div className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start border-t border-white/10 pt-8">
-              {highlights.map((h) => (
-                <div key={h.label} className="flex items-center gap-3 text-slate-300 text-sm font-medium">
-                  <div className="text-accent">{h.icon}</div>
-                  <span>{h.label}</span>
+            {/* Mobile visual — simplified stat row */}
+            <div className="grid grid-cols-3 gap-3 lg:hidden">
+              {[
+                { stat: "500+", label: "Clients", bg: "bg-peach" },
+                { stat: "100%", label: "Compliance", bg: "bg-soft-blue" },
+                { stat: "10+", label: "Years", bg: "bg-peach" },
+              ].map((item) => (
+                <div key={item.label} className={`${item.bg} rounded-2xl p-4 text-center`}>
+                  <p className="text-2xl font-bold text-primary">{item.stat}</p>
+                  <p className="text-xs font-medium text-slate-600 mt-1">{item.label}</p>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Right — abstract trust graphic upgraded */}
-          <div className="hidden lg:flex items-center justify-center relative z-10">
-            <div className="relative flex h-[400px] w-[400px] items-center justify-center">
-              <div className="absolute h-full w-full rounded-full border border-white/20 animate-[spin_30s_linear_infinite]" />
-              <div className="absolute h-[320px] w-[320px] rounded-full border-2 border-accent/30 animate-[spin_20s_linear_infinite_reverse]" />
-              <div className="absolute h-[240px] w-[240px] rounded-full bg-gradient-to-tr from-white/5 to-white/20 backdrop-blur-xl shadow-2xl flex items-center justify-center border border-white/30">
-                <span className="text-7xl font-black text-white drop-shadow-xl bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400">VK</span>
+      {/* ═══════════════════════════════════════
+          FEATURE SHOWCASE — 2-col
+          ═══════════════════════════════════════ */}
+      <section className="py-16 md:py-24 lg:py-28 bg-white" id="showcase">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left text */}
+            <div ref={addRef} className="reveal flex flex-col gap-6 max-w-xl">
+              <p className="text-sm font-medium text-primary uppercase tracking-wide">
+                Features at a Glance
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-[1.1]">
+                Professional services, simplified
+              </h2>
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-[48ch]">
+                From tax filings to company registrations, we handle every aspect of your financial compliance with precision, timeliness, and complete transparency.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                {[
+                  { icon: <Shield size={16} />, text: "Compliance" },
+                  { icon: <TrendingUp size={16} />, text: "Growth" },
+                  { icon: <Users size={16} />, text: "Support" },
+                ].map((item) => (
+                  <span
+                    key={item.text}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-slate-50 rounded-full px-4 py-2 border border-slate-100"
+                  >
+                    {item.icon}
+                    {item.text}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Dashboard mock */}
+            <div ref={addRef} className="reveal">
+              <div className="animate-float rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden">
+                {/* Window chrome */}
+                <div className="flex items-center gap-2 px-5 py-3 bg-primary">
+                  <div className="flex gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                  </div>
+                  <span className="flex-1 text-center text-[11px] text-white/50 font-medium">
+                    service-dashboard
+                  </span>
+                </div>
+                {/* Content */}
+                <div className="p-5 bg-slate-50/50">
+                  <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white">
+                      <Briefcase size={14} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-900">Service Dashboard</p>
+                      <p className="text-[11px] text-slate-500">4 active services</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2.5">
+                    {SERVICES.map((svc, i) => (
+                      <div key={svc.category} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-100">
+                        <div className={`flex items-center justify-center w-9 h-9 rounded-lg shrink-0 text-primary ${i % 2 === 0 ? "bg-peach" : "bg-soft-blue"}`}>
+                          {iconMap[svc.icon]}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-slate-900 truncate">{svc.category}</p>
+                          <p className="text-[11px] text-slate-500">{svc.items.length} services</p>
+                        </div>
+                        <span className="flex items-center gap-1 text-[10px] font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full shrink-0">
+                          <GitBranch size={10} />
+                          Active
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES PREVIEW ── */}
-      <section className="bg-slate-50 py-24 md:py-32" id="services-preview">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-sm font-bold text-accent uppercase tracking-widest mb-3">
-              What We Offer
-            </p>
-            <h2 className="text-4xl font-extrabold text-[#0F172A] sm:text-5xl">
-              Our Professional Services
+      {/* ═══════════════════════════════════════
+          SERVICES — Pricing-style cards
+          ═══════════════════════════════════════ */}
+      <section className="py-16 md:py-24 lg:py-28 bg-slate-50" id="services-preview">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div ref={addRef} className="reveal text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-[1.1]">
+              Our professional services
             </h2>
-            <div className="mt-6 h-1 w-20 bg-accent mx-auto rounded-full"></div>
-            <p className="mt-6 text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
-              We provide highly structured framework solutions, navigating complex compliances flawlessly so you can focus strictly on growing your business.
+            <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
+              Comprehensive financial solutions tailored to your business. Choose the service that fits your requirements.
             </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((svc) => (
+          <div className="grid gap-6 lg:gap-8 md:grid-cols-3">
+            {serviceCards.map((card, idx) => (
               <div
-                key={svc.category}
-                className="group relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+                key={card.title}
+                ref={addRef}
+                className={`reveal stagger-${idx + 1} group rounded-2xl bg-white overflow-hidden shadow-sm border border-slate-200/80 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 ${card.highlighted ? "ring-2 ring-primary/20 shadow-lg" : ""}`}
               >
-                {/* Decorative background glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="relative z-10">
-                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 border border-slate-100 text-primary shadow-sm group-hover:bg-primary group-hover:text-white group-hover:shadow-md transition-all duration-300">
-                    {iconMap[svc.icon]}
+                {/* Header */}
+                <div className={`${card.headerBg} p-6 pb-7`}>
+                  {card.highlighted && (
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-white text-primary px-3 py-1 rounded-full mb-3">
+                      Popular
+                    </span>
+                  )}
+                  <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl mb-3 ${card.textWhite ? "bg-white/20 text-white" : "bg-white/60 text-primary"}`}>
+                    {card.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-[#0F172A] mb-4">
-                    {svc.category}
+                  <h3 className={`text-lg font-semibold ${card.textWhite ? "text-white" : "text-slate-900"}`}>
+                    {card.title}
                   </h3>
+                  <p className={`text-sm mt-1 ${card.textWhite ? "text-white/70" : "text-slate-600"}`}>
+                    {card.subtitle}
+                  </p>
+                </div>
+
+                {/* Features */}
+                <div className="p-6">
                   <ul className="space-y-3">
-                    {svc.items.slice(0, 3).map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 text-sm text-slate-600 font-medium"
-                      >
-                        <CheckCircle size={18} className="text-accent shrink-0 mt-0.5" />
-                        <span className="leading-snug">{item}</span>
+                    {card.features.map((f) => (
+                      <li key={f} className="flex items-start gap-3 text-sm text-slate-700 font-medium">
+                        <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                        <span className="leading-snug">{f}</span>
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    href="/services"
+                    className={`mt-7 flex items-center justify-center rounded-full py-3 text-sm font-semibold transition-all duration-200 ${card.highlighted
+                      ? "bg-primary text-white hover:bg-primary/90 shadow-sm"
+                      : "border border-slate-300 text-slate-700 hover:bg-slate-100"
+                      }`}
+                  >
+                    {card.highlighted ? "Get Started" : "Learn More"}
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="mt-16 text-center">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-3 text-base font-bold text-primary hover:text-accent group transition-colors"
-            >
-              Explore All Services
-              <span className="group-hover:translate-x-1 transition-transform bg-primary/10 group-hover:bg-accent/10 p-2 rounded-full">
-                <ArrowRight size={18} />
-              </span>
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ── ABOUT PREVIEW ── */}
-      <section className="bg-white py-24 md:py-32" id="about-preview">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              <p className="text-sm font-bold text-accent uppercase tracking-widest mb-3">
-                Who We Are
-              </p>
-              <h2 className="text-4xl font-extrabold text-[#0F172A] sm:text-5xl">
-                About {SITE_CONFIG.name}
-              </h2>
-              <div className="mt-6 h-1 w-20 bg-accent mx-auto lg:mx-0 rounded-full"></div>
-              <p className="mt-8 max-w-xl mx-auto lg:mx-0 text-lg text-slate-600 font-light leading-relaxed">
-                With elite expertise in taxation, extensive auditing intelligence, and secure business compliance strategies, we engineer precise financial solutions that definitively empower businesses.
-                <br /><br />
-                Our strict commitment to accuracy, total transparency, and flawless regulatory adherence elevates our client's peace of mind to the highest degree.
-              </p>
-              <Link
-                href="/about"
-                className="mt-10 inline-flex items-center justify-center gap-3 rounded-full bg-slate-900 text-white hover:bg-primary px-8 py-4 text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-              >
-                Read Our Story <ArrowRight size={18} />
-              </Link>
-            </div>
-
-            {/* Premium Stats Grid */}
-            <div className="order-1 lg:order-2 grid grid-cols-2 gap-6 p-6 lg:p-10 rounded-3xl bg-slate-50 border border-slate-100 shadow-inner">
-              {[
-                { value: "10+", label: "Years Experience" },
-                { value: "500+", label: "Clients Served" },
-                { value: "100%", label: "Compliance Rate" },
-                { value: "24/7", label: "Client Support" },
-              ].map((stat, idx) => (
-                <div
-                  key={stat.label}
-                  className={`relative rounded-2xl bg-white p-8 text-center shadow-sm border border-slate-100 hover:shadow-xl hover:border-accent/30 transition-all duration-300 transform hover:-translate-y-1 ${idx === 1 || idx === 3 ? 'lg:translate-y-6' : ''}`}
-                >
-                  <p className="text-4xl lg:text-5xl font-black text-primary mb-2 drop-shadow-sm">
-                    {stat.value}
-                  </p>
-                  <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CONTACT CTA ── */}
-      <section className="relative py-24 md:py-32 bg-primary overflow-hidden" id="contact-cta">
-        {/* Abstract waves for the bottom CTA */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 h-64 w-64 rounded-full bg-accent blur-[80px]"></div>
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-64 w-64 rounded-full bg-white blur-[80px] opacity-20"></div>
-
-        <div className="relative mx-auto max-w-4xl px-6 text-center text-white lg:px-8 z-10">
-          <h2 className="text-4xl font-extrabold sm:text-5xl drop-shadow-md">
-            Ready to Accelerate Your Growth?
-          </h2>
-          <p className="mt-6 text-lg text-slate-200 max-w-2xl mx-auto font-light leading-relaxed">
-            Take the first step toward impeccable financial health. Book a high-impact, free consultation today to streamline your compliance needs definitively.
-          </p>
-          <Link
-            href="/contact"
-            id="cta-btn"
-            className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 text-base font-bold text-primary shadow-[0_10px_40px_-10px_rgba(255,255,255,0.4)] hover:shadow-[0_15px_60px_-10px_rgba(255,255,255,0.6)] hover:-translate-y-1 transition-all duration-300"
+      {/* ═══════════════════════════════════════
+          CONTACT CTA
+          ═══════════════════════════════════════ */}
+      <section className="py-16 md:py-24 lg:py-28 bg-white" id="contact-cta">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div
+            ref={addRef}
+            className="reveal relative overflow-hidden rounded-3xl bg-primary px-8 py-14 md:px-14 md:py-16"
           >
-            Schedule Consultation Now <ArrowRight size={20} className="text-accent" />
-          </Link>
+            {/* Blobs */}
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-peach/15 blur-[80px] -mt-20 -mr-20 animate-blob-pulse pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-soft-blue/15 blur-[60px] -mb-16 -ml-16 animate-blob-pulse pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+              {/* Left */}
+              <div className="flex-1 text-center lg:text-left">
+                <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-[1.15]">
+                  Have a project in mind?
+                </h2>
+                <p className="mt-4 text-base text-white/60 leading-relaxed max-w-md mx-auto lg:mx-0">
+                  Write to us, we will respond promptly. Book a free consultation and let us simplify your compliance.
+                </p>
+              </div>
+
+              {/* Right */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+                <input
+                  type="email"
+                  placeholder="Enter your e-mail"
+                  className="w-full sm:w-72 rounded-full bg-white/10 border border-white/15 px-6 py-3.5 text-sm text-white placeholder:text-white/30 font-medium outline-none focus:bg-white/15 focus:border-white/30 transition-all duration-200"
+                />
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-peach px-7 py-3.5 text-sm font-semibold text-primary hover:bg-peach/90 transition-all duration-200 shadow-sm shrink-0"
+                >
+                  <Send size={14} />
+                  Send
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>
