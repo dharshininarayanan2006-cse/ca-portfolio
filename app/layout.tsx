@@ -37,7 +37,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <body className="antialiased overflow-x-hidden bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <ThemeProviderWrapper>
           <Navbar />
           <main className="min-h-screen">{children}</main>

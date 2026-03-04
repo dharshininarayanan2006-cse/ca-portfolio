@@ -82,7 +82,7 @@ export default function Home() {
                 Trusted Chartered Accountant in Chennai
               </p>
 
-              <h1 className="flex flex-wrap gap-x-[0.05em] gap-y-0 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.1] max-w-[24ch] lg:max-w-[26ch]">
+              <h1 className="flex flex-wrap gap-x-[0.05em] gap-y-0 text-[32px] leading-[1.1] sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white max-w-[24ch] lg:max-w-[26ch]">
                 {heroWords.map((word, i) => (
                   <span
                     key={i}
@@ -164,7 +164,7 @@ export default function Home() {
                 <div
                   key={item.label}
                   ref={addReveal}
-                  className={`scroll-animate reveal-up stagger-${idx + 1} ${item.bg} rounded-2xl p-4 text-center`}
+                  className={`scroll-animate reveal-up stagger-${idx + 1} ${item.bg} rounded-[1rem] p-3 sm:p-4 text-center`}
                 >
                   <p className="text-2xl font-bold text-primary dark:text-peach">
                     <CountUp end={item.stat} suffix={item.suffix} />
@@ -265,7 +265,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             ref={addReveal}
-            className="scroll-animate reveal-blur text-center max-w-2xl mx-auto mb-14"
+            className="scroll-animate reveal-blur text-center max-w-2xl mx-auto mb-10 sm:mb-14"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
               Our professional services
@@ -282,7 +282,7 @@ export default function Home() {
                 ref={addReveal}
                 className={`scroll-animate reveal-scale stagger-${idx + 1} group rounded-2xl bg-white dark:bg-slate-800 overflow-hidden shadow-sm border border-slate-200/80 dark:border-slate-700 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-black/30 transition-all duration-300 ${card.highlighted ? "ring-2 ring-primary/20 dark:ring-peach/20 shadow-lg" : ""}`}
               >
-                <div className={`${card.headerBg} ${card.headerBgDark} p-6 pb-7`}>
+                <div className={`${card.headerBg} ${card.headerBgDark} p-5 sm:p-6 pb-6 sm:pb-7`}>
                   {card.highlighted && (
                     <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-white dark:bg-slate-900 text-primary dark:text-peach px-3 py-1 rounded-full mb-3">
                       Popular
@@ -299,7 +299,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
                   <ul className="space-y-3">
                     {card.features.map((f) => (
                       <li key={f} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
@@ -331,14 +331,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             ref={addReveal}
-            className="scroll-animate reveal-scale relative overflow-hidden rounded-3xl bg-primary px-8 py-14 md:px-14 md:py-16"
+            className="scroll-animate reveal-scale relative overflow-hidden rounded-[1.5rem] md:rounded-3xl bg-primary px-5 py-10 sm:px-8 sm:py-14 md:px-14 md:py-16"
           >
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-peach/15 blur-[80px] -mt-20 -mr-20 animate-blob-pulse pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-soft-blue/15 blur-[60px] -mb-16 -ml-16 animate-blob-pulse pointer-events-none" />
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
               <div className="flex-1 text-center lg:text-left">
-                <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-[1.15]">
+                <h2 className="text-[28px] leading-[1.1] sm:text-4xl font-semibold text-white tracking-tight">
                   Have a project in mind?
                 </h2>
                 <p className="mt-4 text-base text-white/60 leading-relaxed max-w-md mx-auto lg:mx-0">
@@ -350,7 +350,7 @@ export default function Home() {
                 <input
                   type="email"
                   placeholder="Enter your e-mail"
-                  className="w-full sm:w-72 rounded-full bg-white/10 border border-white/15 px-6 py-3.5 text-sm text-white placeholder:text-white/30 font-medium outline-none focus:bg-white/15 focus:border-white/30 transition-all duration-200"
+                  className="w-full sm:w-72 rounded-full bg-white/10 border border-white/15 px-5 py-3 sm:px-6 sm:py-3.5 text-sm text-white placeholder:text-white/30 font-medium outline-none focus:bg-white/15 focus:border-white/30 transition-all duration-200"
                 />
                 <Link
                   href="/contact"
