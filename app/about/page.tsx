@@ -1,3 +1,6 @@
+"use client";
+
+import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { ABOUT_TEXT, SITE_CONFIG } from "@/lib/constants";
 import {
     Award,
@@ -6,12 +9,6 @@ import {
     GraduationCap,
     Target,
 } from "lucide-react";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: `About | ${SITE_CONFIG.name}`,
-    description: ABOUT_TEXT.slice(0, 155),
-};
 
 const values = [
     {
@@ -46,53 +43,76 @@ const qualifications = [
 ];
 
 export default function AboutPage() {
+    const { addReveal } = useScrollAnimations();
+
     return (
         <>
             {/* Page Header */}
             <section className="bg-primary text-white py-16 md:py-24 lg:py-28">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <p className="text-sm font-medium uppercase tracking-wider text-white/60">
+                    <p
+                        ref={addReveal}
+                        className="scroll-animate reveal-blur text-sm font-medium uppercase tracking-wider text-white/60"
+                    >
                         Get to Know Us
                     </p>
-                    <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+                    <h1
+                        ref={addReveal}
+                        className="scroll-animate reveal-blur stagger-1 mt-2 text-4xl font-semibold tracking-tight sm:text-5xl"
+                    >
                         About {SITE_CONFIG.name}
                     </h1>
-                    <p className="mt-4 max-w-2xl text-lg text-white/70 leading-relaxed">
+                    <p
+                        ref={addReveal}
+                        className="scroll-animate reveal-up stagger-2 mt-4 max-w-2xl text-lg text-white/70 leading-relaxed"
+                    >
                         {SITE_CONFIG.tagline}
                     </p>
-                    <div className="mt-8 h-px w-24 bg-white/20" />
+                    <div
+                        ref={addReveal}
+                        className="scroll-animate reveal-left stagger-3 mt-8 h-px w-24 bg-white/20"
+                    />
                 </div>
             </section>
 
             {/* Bio */}
-            <section className="bg-white py-16 md:py-24 lg:py-28">
+            <section className="bg-white dark:bg-slate-950 py-16 md:py-24 lg:py-28">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-10 lg:grid-cols-5">
-                        <div className="lg:col-span-3">
-                            <h2 className="text-2xl font-semibold text-slate-900">
+                        <div
+                            ref={addReveal}
+                            className="scroll-animate reveal-left lg:col-span-3"
+                        >
+                            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">
                                 Professional Background
                             </h2>
-                            <p className="mt-4 text-slate-600 leading-relaxed whitespace-pre-line">
+                            <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-line">
                                 {ABOUT_TEXT}
                             </p>
-                            <p className="mt-4 text-slate-600 leading-relaxed">
-                                Based in <strong>Chennai</strong>, I work with businesses of all
+                            <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Based in <strong className="text-slate-900 dark:text-white">Chennai</strong>, I work with businesses of all
                                 sizes — from startups to established enterprises — helping them
                                 navigate the complexities of Indian taxation and corporate
                                 compliance with confidence.
                             </p>
                         </div>
 
-                        {/* Qualifications sidebar */}
-                        <div className="lg:col-span-2">
-                            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                                <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                        <div
+                            ref={addReveal}
+                            className="scroll-animate reveal-right stagger-2 lg:col-span-2"
+                        >
+                            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
                                     Qualifications & Expertise
                                 </h3>
                                 <ul className="space-y-3">
-                                    {qualifications.map((q) => (
-                                        <li key={q} className="flex items-center gap-3 text-sm text-slate-600">
-                                            <CheckCircle size={16} className="text-primary shrink-0" />
+                                    {qualifications.map((q, i) => (
+                                        <li
+                                            key={q}
+                                            ref={addReveal}
+                                            className={`scroll-animate reveal-up stagger-${i + 1} flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400`}
+                                        >
+                                            <CheckCircle size={16} className="text-primary dark:text-peach shrink-0" />
                                             {q}
                                         </li>
                                     ))}
@@ -104,27 +124,34 @@ export default function AboutPage() {
             </section>
 
             {/* Core Values */}
-            <section className="bg-slate-50 py-16 md:py-24 lg:py-28">
+            <section className="bg-slate-50 dark:bg-slate-900 py-16 md:py-24 lg:py-28">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <p className="text-sm font-medium text-primary uppercase tracking-wider">
+                    <div
+                        ref={addReveal}
+                        className="scroll-animate reveal-blur text-center mb-12"
+                    >
+                        <p className="text-sm font-medium text-primary dark:text-peach uppercase tracking-wider">
                             What Drives Us
                         </p>
-                        <h2 className="mt-2 text-3xl font-semibold text-slate-900">
+                        <h2 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-white">
                             Our Core Values
                         </h2>
                     </div>
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        {values.map((v) => (
+                        {values.map((v, idx) => (
                             <div
                                 key={v.title}
-                                className="group rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                                ref={addReveal}
+                                className={`scroll-animate reveal-scale stagger-${idx + 1} group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 text-center shadow-sm hover:shadow-md dark:hover:shadow-black/30 hover:-translate-y-1 transition-all duration-300`}
                             >
-                                <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <div
+                                    ref={addReveal}
+                                    className={`scroll-animate reveal-rotate stagger-${idx + 2} mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 dark:bg-peach/10 text-primary dark:text-peach group-hover:bg-primary group-hover:text-white dark:group-hover:bg-peach dark:group-hover:text-primary transition-colors duration-300`}
+                                >
                                     {v.icon}
                                 </div>
-                                <h3 className="text-lg font-semibold text-slate-900">{v.title}</h3>
-                                <p className="mt-2 text-sm text-slate-500 leading-relaxed">{v.desc}</p>
+                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{v.title}</h3>
+                                <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{v.desc}</p>
                             </div>
                         ))}
                     </div>

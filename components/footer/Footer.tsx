@@ -1,9 +1,13 @@
+"use client";
+
+import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
     const year = new Date().getFullYear();
+    const { addReveal } = useScrollAnimations();
 
     return (
         <footer className="bg-primary text-white" id="footer">
@@ -13,7 +17,7 @@ export default function Footer() {
             <div className="mx-auto max-w-[1280px] px-6 py-14 lg:px-8 lg:py-16">
                 <div className="grid gap-12 md:grid-cols-3">
                     {/* Brand */}
-                    <div>
+                    <div ref={addReveal} className="scroll-animate reveal-up">
                         <div className="flex items-center gap-3 mb-5">
                             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white font-bold text-sm border border-white/10">
                                 VK
@@ -33,7 +37,7 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
+                    <div ref={addReveal} className="scroll-animate reveal-up stagger-2">
                         <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white/30 mb-5">
                             Quick Links
                         </h3>
@@ -56,7 +60,7 @@ export default function Footer() {
                     </div>
 
                     {/* Contact Info */}
-                    <div>
+                    <div ref={addReveal} className="scroll-animate reveal-up stagger-3">
                         <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white/30 mb-5">
                             Get in Touch
                         </h3>
@@ -96,7 +100,10 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="mt-14 border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div
+                    ref={addReveal}
+                    className="scroll-animate reveal-up stagger-4 mt-14 border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+                >
                     <p className="text-xs text-white/30 font-medium">
                         © {year} {SITE_CONFIG.name}. All rights reserved.
                     </p>
