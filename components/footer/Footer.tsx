@@ -14,10 +14,10 @@ export default function Footer() {
             {/* Gradient top separator */}
             <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-            <div className="mx-auto max-w-[1280px] px-6 py-14 lg:px-8 lg:py-16">
-                <div className="grid gap-12 md:grid-cols-3">
+            <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-10 sm:py-14 lg:px-8 lg:py-16">
+                <div className="grid gap-8 sm:gap-12 sm:grid-cols-2 md:grid-cols-3">
                     {/* Brand */}
-                    <div ref={addReveal} className="scroll-animate reveal-up">
+                    <div ref={addReveal} className="scroll-animate reveal-up sm:col-span-2 md:col-span-1">
                         <div className="flex items-center gap-3 mb-5">
                             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white font-bold text-sm border border-white/10">
                                 VK

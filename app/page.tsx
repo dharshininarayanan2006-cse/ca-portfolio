@@ -82,14 +82,14 @@ export default function Home() {
                 Trusted Chartered Accountant in Chennai
               </p>
 
-              <h1 className="flex flex-wrap gap-x-[0.05em] gap-y-0 text-[32px] leading-[1.1] sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white max-w-[24ch] lg:max-w-[26ch]">
+              <h1 className="text-[32px] leading-[1.1] sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white max-w-[24ch] lg:max-w-[26ch]">
                 {heroWords.map((word, i) => (
                   <span
                     key={i}
                     ref={addReveal}
                     className={`scroll-animate hero-word word-delay-${i + 1}`}
                   >
-                    {word}
+                    {word}{" "}
                   </span>
                 ))}
               </h1>
@@ -122,7 +122,7 @@ export default function Home() {
 
               <div
                 ref={addReveal}
-                className="scroll-animate reveal-up stagger-5 flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200/80 dark:border-slate-700/80"
+                className="scroll-animate reveal-up stagger-5 hidden lg:flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200/80 dark:border-slate-700/80"
               >
                 <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
                   <span className="text-primary dark:text-peach"><Shield size={16} /></span>
@@ -331,7 +331,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             ref={addReveal}
-            className="scroll-animate reveal-scale relative overflow-hidden rounded-[1.5rem] md:rounded-3xl bg-primary px-5 py-10 sm:px-8 sm:py-14 md:px-14 md:py-16"
+            className="scroll-animate reveal-scale relative overflow-hidden rounded-2xl md:rounded-3xl bg-primary px-5 py-10 sm:px-8 sm:py-14 md:px-14 md:py-16"
           >
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-peach/15 blur-[80px] -mt-20 -mr-20 animate-blob-pulse pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-soft-blue/15 blur-[60px] -mb-16 -ml-16 animate-blob-pulse pointer-events-none" />

@@ -19,6 +19,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -252,6 +253,7 @@
     opacity: 0;
     transform: translateY(18px) rotateX(30deg);
     filter: blur(4px);
+    margin-right: 0.3em;
   }
 
   .hero-word.in-view {
@@ -349,30 +351,34 @@
     transform: translateY(20px);
   }
 
+  /* On narrow screens, swap horizontal slides to vertical to prevent clipping */
   .reveal-left {
-    transform: translateX(-24px);
+    transform: translateX(0) translateY(20px);
   }
 
   .reveal-right {
-    transform: translateX(24px);
+    transform: translateX(0) translateY(20px);
   }
 
-  .reveal-blur {
-    filter: blur(6px);
-    transform: translateY(8px);
+  /* No blur on mobile — headings must always be readable */
+  .reveal-blur,
+  .reveal-blur.in-view {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .reveal-scale {
-    transform: scale(0.93);
+    transform: scale(0.95);
   }
 
   .hero-word {
-    transform: translateY(12px) rotateX(20deg);
-    filter: blur(3px);
+    transform: translateY(8px);
+    filter: none;
   }
 
   .scroll-animate {
-    transition-duration: 0.55s;
+    transition-duration: 0.5s;
   }
 
   /* Reduce stagger gaps on mobile for snappier feel */
