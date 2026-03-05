@@ -28,19 +28,19 @@ export default function Navbar() {
                     : "bg-white dark:bg-slate-950 border-b border-slate-200/40 dark:border-slate-800/40"
             )}
         >
-            <nav className="mx-auto flex h-16 md:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <nav className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                 {/* ─── Left: Brand ─── */}
                 <Link href="/" className="flex items-center gap-3" id="brand-logo">
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">
                         VK
                     </span>
-                    <span className="font-semibold text-slate-900 dark:text-white text-base md:text-lg">
+                    <span className="font-semibold text-slate-900 dark:text-white text-base sm:text-lg">
                         {SITE_CONFIG.name}
                     </span>
                 </Link>
 
                 {/* ─── Center: Nav links ─── */}
-                <ul className="hidden md:flex items-center gap-8">
+                <ul className="hidden sm:flex items-center gap-6 md:gap-8">
                     {NAV_LINKS.map((link) => (
                         <li key={link.href}>
                             <Link
@@ -65,13 +65,13 @@ export default function Navbar() {
                     <Link
                         href="/contact"
                         id="nav-cta-btn"
-                        className="hidden md:inline-flex items-center rounded-full px-5 py-2.5 text-sm font-medium bg-primary text-white hover:bg-primary/90 dark:bg-peach dark:text-primary dark:hover:bg-peach/90 transition-all duration-200 shadow-sm"
+                        className="hidden sm:inline-flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-medium bg-primary text-white hover:bg-primary/90 dark:bg-peach dark:text-primary dark:hover:bg-peach/90 transition-all duration-200 shadow-sm"
                     >
                         Contact Me
                     </Link>
                     <button
                         onClick={() => setMobileOpen(!mobileOpen)}
-                        className="md:hidden p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="sm:hidden p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         id="mobile-menu-btn"
                         aria-label="Toggle menu"
                     >
@@ -83,7 +83,7 @@ export default function Navbar() {
             {/* ─── Mobile Menu ─── */}
             <div
                 className={clsx(
-                    "md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800",
+                    "sm:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800",
                     mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-t-0"
                 )}
             >

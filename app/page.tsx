@@ -122,7 +122,7 @@ export default function Home() {
 
               <div
                 ref={addReveal}
-                className="scroll-animate reveal-up stagger-5 hidden md:flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200/80 dark:border-slate-700/80"
+                className="scroll-animate reveal-up stagger-5 hidden sm:flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200/80 dark:border-slate-700/80"
               >
                 <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
                   <span className="text-primary dark:text-peach"><Shield size={16} /></span>
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
 
             {/* Mobile stat row */}
-            <div className="grid grid-cols-3 gap-3 md:hidden">
+            <div className="grid grid-cols-3 gap-3 sm:hidden">
               {[
                 { stat: 500, suffix: "+", label: "Clients", bg: "bg-peach dark:bg-peach/15" },
                 { stat: 100, suffix: "%", label: "Compliance", bg: "bg-soft-blue dark:bg-soft-blue/15" },
