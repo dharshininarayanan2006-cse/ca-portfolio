@@ -74,10 +74,11 @@ module.exports = async (req, res) => {
                     const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
 
                     const prompt = `You are an AI assistant analyzing an email from Mint (which could be a personal financial alert OR a finance news article/newsletter).
-              Read the following email text and extract three things into a valid JSON object:
+              Read the following email text and extract four things into a valid JSON object:
               1. "title": A short, catchy 3-4 word title summarizing the email.
               2. "summary": A clean, 1-2 sentence human-readable summary of the main point or top news story.
               3. "amount": If it's a personal finance alert, extract the primary dollar amount (e.g. "$140.50"). If it is a news article or newsletter, output "📰 News" or a short 1-2 word topic tag (e.g. "📉 Market Drop").
+              4. "fullStory": A detailed, 3-5 sentence paragraph explaining the full context of the alert or the news article.
               
               ONLY return the valid raw JSON object, no markdown blocks.
               
@@ -97,7 +98,8 @@ module.exports = async (req, res) => {
                         title: result.title || subjectHeader?.value || 'Alert',
                         date: dateHeader ? new Date(dateHeader.value).toLocaleDateString() : 'Recent',
                         summary: result.summary || emailBody.substring(0, 100),
-                        amount: result.amount || 'View Data'
+                        amount: result.amount || 'View Data',
+                        fullStory: result.fullStory || emailBody.substring(0, 500)
                     });
                     continue;
                 } catch (aiError) {
@@ -110,7 +112,8 @@ module.exports = async (req, res) => {
                 title: subjectHeader ? subjectHeader.value : 'Alert',
                 date: dateHeader ? new Date(dateHeader.value).toLocaleDateString() : 'Recent',
                 summary: emailBody.substring(0, 150) + '...',
-                amount: emailBody.match(/\$[\d,]+\.\d{2}/) ? emailBody.match(/\$[\d,]+\.\d{2}/)[0] : 'View Data'
+                amount: emailBody.match(/\$[\d,]+\.\d{2}/) ? emailBody.match(/\$[\d,]+\.\d{2}/)[0] : 'View Data',
+                fullStory: emailBody.substring(0, 800) + '...'
             });
         }
 
