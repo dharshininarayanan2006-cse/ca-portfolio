@@ -73,11 +73,11 @@ module.exports = async (req, res) => {
                     const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
                     const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-                    const prompt = `You are a financial assistant reading an email. 
+                    const prompt = `You are an AI assistant analyzing an email from Mint (which could be a personal financial alert OR a finance news article/newsletter).
               Read the following email text and extract three things into a valid JSON object:
-              1. "title": A short, catchy 3-4 word title.
-              2. "summary": A clean, 1-2 sentence human-readable summary.
-              3. "amount": The primary dollar amount mentioned (e.g. "$140.50"), or "N/A" if none.
+              1. "title": A short, catchy 3-4 word title summarizing the email.
+              2. "summary": A clean, 1-2 sentence human-readable summary of the main point or top news story.
+              3. "amount": If it's a personal finance alert, extract the primary dollar amount (e.g. "$140.50"). If it is a news article or newsletter, output "📰 News" or a short 1-2 word topic tag (e.g. "📉 Market Drop").
               
               ONLY return the valid raw JSON object, no markdown blocks.
               
