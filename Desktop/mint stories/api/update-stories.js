@@ -15,22 +15,21 @@ module.exports = async (req, res) => {
 
         const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
 
-        // 1. Fetch recent emails - broadened search
-        // Try specific known senders first, with a wider time window
+        // 1. Fetch recent emails - search for ANY email from/about Mint
         let response = await gmail.users.messages.list({
             userId: 'me',
-            q: '(from:alerts@mint.intuit.com OR from:newsletters@livemint.com OR from:noreply@htdigital.in OR from:mint OR subject:mint OR subject:"budget alert" OR subject:"spending alert" OR subject:"bank alert" OR subject:"credit card" OR subject:"transaction alert") newer_than:30d',
-            maxResults: 15,
+            q: '(from:mint OR to:mint OR subject:mint OR mint) newer_than:30d',
+            maxResults: 20,
         });
 
         let messages = response.data.messages || [];
 
-        // Fallback: if no results, try an even broader search
+        // Fallback: if no results in 30 days, try 90 days
         if (messages.length === 0) {
             response = await gmail.users.messages.list({
                 userId: 'me',
-                q: '(subject:alert OR subject:transaction OR subject:payment OR subject:budget OR from:mint) newer_than:90d',
-                maxResults: 10,
+                q: '(from:mint OR to:mint OR subject:mint OR mint) newer_than:90d',
+                maxResults: 20,
             });
             messages = response.data.messages || [];
         }
@@ -39,7 +38,7 @@ module.exports = async (req, res) => {
         if (messages.length === 0) {
             return res.status(200).json({
                 stories: [],
-                message: 'No Mint or financial alert emails found in your inbox. Make sure you have Mint alerts enabled or financial notification emails in this Gmail account.'
+                message: 'No emails related to Mint were found in your inbox. Make sure this Gmail account has received emails from Mint.'
             });
         }
         const parsedStories = [];
